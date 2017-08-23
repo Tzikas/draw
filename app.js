@@ -57,10 +57,16 @@ app.use(function(err, req, res, next) {
 });
 
 
+
 (function() {
 	console.log('adf')
   var io;
-  io = require('socket.io').listen(4000);
+  io = require('socket.io')
+	
+	({
+      transports  : [ 'xhr-polling' ]
+    }).
+	listen(4000);
   io.sockets.on('connection', function(socket) {
     socket.on('drawClick', function(data) {
       socket.broadcast.emit('draw', {
@@ -70,6 +76,8 @@ app.use(function(err, req, res, next) {
       });
     });
   });
+
+
 }).call(this);
 
 
