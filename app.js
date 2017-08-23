@@ -68,11 +68,9 @@ app.use(function(err, req, res, next) {
 	
 	({
       transports  : [ 'xhr-polling' ]
-    })
+    }).
+	listen('https//murmuring-everglades-16936.herokuapp.com');
   io.sockets.on('connection', function(socket) {
-	  console.log(socket.headers)
-	  console.log(socket.headers.host)
-	  
     socket.on('drawClick', function(data) {
       socket.broadcast.emit('draw', {
         x: data.x,
