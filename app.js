@@ -4,6 +4,7 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var http = require('http');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
@@ -60,14 +61,18 @@ app.use(function(err, req, res, next) {
 
 (function() {
 	console.log('adf')
+  var server = http.createServer(app);
+	
   var io;
   io = require('socket.io')
 	
 	({
       transports  : [ 'xhr-polling' ]
-    }).
-	listen(4000);
+    })
   io.sockets.on('connection', function(socket) {
+	  console.log(socket.headers)
+	  console.log(socket.headers.host)
+	  
     socket.on('drawClick', function(data) {
       socket.broadcast.emit('draw', {
         x: data.x,

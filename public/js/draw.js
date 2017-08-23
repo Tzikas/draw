@@ -19,7 +19,8 @@
     }, 2000)
     App.ctx.lineWidth = 5;
     App.ctx.lineCap = "round";
-    App.socket = io.connect('http://localhost:4000');
+    //App.socket = io.connect('http://localhost:4000');
+    App.socket = io.connect('https://murmuring-everglades-16936.herokuapp.com/socket.io.js');    
     App.socket.on('draw', function(data) {
       return App.draw(data.x, data.y, data.type);
     });
